@@ -27,11 +27,11 @@ public class QuizFactory implements DataReader{
 		quizQandA = new ArrayList <QuizQuestionsAndAnswers>();
 		qanda = new QuizQuestionsAndAnswers();
 		fileOfQuestions = new File("multimedia/multimedia.txt");
-		questionsReader = new Scanner(fileOfQuestions);
+		questionsReader = new Scanner(this.getFileOfQuestions());
 		quizLength = 20;
 		
 		this.getQuizLength();
-		this.readData(getFileOfQuestions(), getQuestionsReader(), getQandA() );
+		this.readData(getQuestionsReader());
 
 	}
 
@@ -51,11 +51,11 @@ public class QuizFactory implements DataReader{
 		this.fileOfQuestions = fileOfQuestions;
 	}
 
-	public QuizQuestionsAndAnswers getQandA() {
+	public QuizQuestionsAndAnswers getQanda() {
 		return qanda;
 	}
 
-	public void setQandA(QuizQuestionsAndAnswers qanda) {
+	public void setQanda(QuizQuestionsAndAnswers qanda) {
 		this.qanda = qanda;
 	}
 
@@ -116,13 +116,12 @@ public class QuizFactory implements DataReader{
 	}
 
 	@Override
-	public void readData(File fileOfQuestions, Scanner questionsReader, QuizQuestionsAndAnswers qanda){
+	public void readData(Scanner questionsReader){
 		
 		try{
 			
-			this.fileOfQuestions = fileOfQuestions;
 			this.questionsReader = questionsReader;
-			this.qanda = qanda;
+			this.questionsReader.useDelimiter(";");
 			
 			while(questionsReader.hasNextLine()){
 				
@@ -163,11 +162,5 @@ public class QuizFactory implements DataReader{
 		}
 		
 		return canPickQuizQuestion;
-	}
-
-	@Override
-	public void readData(File file, Scanner fileReader) {
-		// TODO Auto-generated method stub
-		
 	}
 }
