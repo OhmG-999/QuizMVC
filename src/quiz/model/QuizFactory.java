@@ -21,12 +21,17 @@ public class QuizFactory implements DataReader{
 	private int listSizeOfAllQandA;
 	private int question;
 
-	public QuizFactory(){
+	public QuizFactory() throws FileNotFoundException{
 		
 		listOfAllQandA = new ArrayList <QuizQuestionsAndAnswers>();
 		quizQandA = new ArrayList <QuizQuestionsAndAnswers>();
-		
+		qanda = new QuizQuestionsAndAnswers();
+		fileOfQuestions = new File("multimedia/multimedia.txt");
+		questionsReader = new Scanner(fileOfQuestions);
 		quizLength = 20;
+		
+		this.getQuizLength();
+		this.readData(getFileOfQuestions(), getQuestionsReader(), getQandA() );
 
 	}
 
@@ -46,11 +51,11 @@ public class QuizFactory implements DataReader{
 		this.fileOfQuestions = fileOfQuestions;
 	}
 
-	public QuizQuestionsAndAnswers getQanda() {
+	public QuizQuestionsAndAnswers getQandA() {
 		return qanda;
 	}
 
-	public void setQanda(QuizQuestionsAndAnswers qanda) {
+	public void setQandA(QuizQuestionsAndAnswers qanda) {
 		this.qanda = qanda;
 	}
 
@@ -111,12 +116,13 @@ public class QuizFactory implements DataReader{
 	}
 
 	@Override
-	public void readData(){
+	public void readData(File fileOfQuestions, Scanner questionsReader, QuizQuestionsAndAnswers qanda){
 		
 		try{
 			
-			fileOfQuestions = new File("multimedia/multimedia.txt");
-			questionsReader = new Scanner(fileOfQuestions);
+			this.fileOfQuestions = fileOfQuestions;
+			this.questionsReader = questionsReader;
+			this.qanda = qanda;
 			
 			while(questionsReader.hasNextLine()){
 				
@@ -130,13 +136,6 @@ public class QuizFactory implements DataReader{
 				qanda.setPossibleAnswer4(questionsReader.next());
 				listOfAllQandA.add(qanda);
 			}
-		}
-		catch (FileNotFoundException fileNotFoundException){
-			
-			System.err.println("The file cannot be found. Please check the following:\n 1.The file name\n 2.The file path");
-			fileNotFoundException.printStackTrace();
-			System.exit(1);
-			
 		}
 		catch (NoSuchElementException noSuchElementException){
 			
@@ -156,7 +155,6 @@ public class QuizFactory implements DataReader{
 		
 		if(quizLength > 0){
 			
-			readData();
 			question = pickRandomQuestions.nextInt(listSizeOfAllQandA);
 			quizLength--;
 			quizQandA.add(listOfAllQandA.get(question));
@@ -165,5 +163,11 @@ public class QuizFactory implements DataReader{
 		}
 		
 		return canPickQuizQuestion;
+	}
+
+	@Override
+	public void readData(File file, Scanner fileReader) {
+		// TODO Auto-generated method stub
+		
 	}
 }

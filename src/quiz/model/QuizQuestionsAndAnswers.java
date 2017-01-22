@@ -11,6 +11,10 @@ public class QuizQuestionsAndAnswers {
 	private String possibleAnswer3;
 	private String possibleAnswer4;
 	
+	public QuizQuestionsAndAnswers(){
+		
+	}
+	
 	public QuizQuestionsAndAnswers(int questionID, String multimedia, String question, String correctAnswer, String possibleAnswer1,
 			String possibleAnswer2, String possibleAnswer3, String possibleAnswer4){
 		

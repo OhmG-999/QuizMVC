@@ -5,5 +5,7 @@ import java.util.Scanner;
 
 public interface DataReader {
 
-	public void readData();
+	void readData(File file, Scanner fileReader);
+
+	void readData(File fileOfQuestions, Scanner questionsReader, QuizQuestionsAndAnswers qanda);
 }
