@@ -1,0 +1,1 @@
+1;multimedia/france.jpeg;Which country belongs to that flag?;France;Germany;Spain;China;France;2;multimedia/spain.jpeg;Which country belongs to that flag?;Spain;Germany;Spain;China;France;3;multimedia/germany.jpeg;Which country belongs to that flag?;France;Germany;Spain;China;France
